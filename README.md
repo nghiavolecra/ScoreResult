@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # G-Scores
 
 This is the instruction for web developer intern assignment at [Golden Owl](https://goldenowl.asia). You will build a simple web.
@@ -63,3 +64,6 @@ Don't forget to add `README.md` which includes guide to run your project locally
 # Contributors
 
 - Edric Cao (from GO)
+=======
+# ScoreResult
+>>>>>>> 1024c15731764ef334c44a2ceb95c02a93b7ee9c
