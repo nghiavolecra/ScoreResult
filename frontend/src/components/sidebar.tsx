@@ -11,67 +11,70 @@ import {
 } from '@/components/ui/sidebar'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { cn } from '@/lib/utils'
+import { LayoutDashboard, Search, BarChart3, Settings } from 'lucide-react'
 
 // Menu items.
 const items = [
   {
-    title: '🎉 Dashboard',
+    title: 'Dashboard',
+    icon: LayoutDashboard,
     url: '/'
   },
   {
-    title: '💪 Search Scores',
-    url: 'search-scores'
+    title: 'Search Scores',
+    icon: Search,
+    url: '/search-scores'
   },
   {
-    title: '🧠 Reports',
+    title: 'Reports',
+    icon: BarChart3,
     url: '/report'
   },
   {
-    title: '👨🏾‍🔧 Settings',
-    url: 'settings'
+    title: 'Settings',
+    icon: Settings,
+    url: '/settings'
   }
 ]
-
 export function AppSidebar() {
   const location = useLocation()
   const nav = useNavigate()
   return (
-    <Sidebar>
+    <Sidebar className="bg-gradient-to-b from-[#282a36] to-[#1a1b25] text-white min-h-screen">
       <SidebarHeader
-        onClick={() => {
-          nav('/')
-        }}
-        className='flex flex-row gap-0 justify-center items-center'
+        onClick={() => nav('/')}
+        className="flex flex-row gap-2 justify-center items-center py-6 cursor-pointer"
       >
-        <svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
-          <circle cx='12' cy='12' r='12' fill='#5A67BA' />
-          <path
-            d='M13.808 10.72C13.6687 10.4633 13.467 10.269 13.203 10.137C12.9463 9.99767 12.642 9.928 12.29 9.928C11.6813 9.928 11.1937 10.1297 10.827 10.533C10.4603 10.929 10.277 11.4607 10.277 12.128C10.277 12.8393 10.4677 13.3967 10.849 13.8C11.2377 14.196 11.7693 14.394 12.444 14.394C12.906 14.394 13.2947 14.2767 13.61 14.042C13.9327 13.8073 14.1673 13.47 14.314 13.03H11.927V11.644H16.019V13.393C15.8797 13.8623 15.6413 14.2987 15.304 14.702C14.974 15.1053 14.5523 15.4317 14.039 15.681C13.5257 15.9303 12.9463 16.055 12.301 16.055C11.5383 16.055 10.8563 15.89 10.255 15.56C9.661 15.2227 9.19533 14.757 8.858 14.163C8.528 13.569 8.363 12.8907 8.363 12.128C8.363 11.3653 8.528 10.687 8.858 10.093C9.19533 9.49167 9.661 9.026 10.255 8.696C10.849 8.35867 11.5273 8.19 12.29 8.19C13.214 8.19 13.9913 8.41367 14.622 8.861C15.26 9.30833 15.6817 9.928 15.887 10.72H13.808Z'
-            fill='white'
-          />
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="12" fill="#F99C30" />
+          <path d="M13.808 10.72..." fill="white" />
         </svg>
-        <p className='text-[#F99C30] font-bold text-[20px] cursor-pointer ml-1'>G</p>
-        <p className='text-[#F2383A] font-bold text-[20px] cursor-pointer'>Scores</p>
+        <p className="text-[#F99C30] font-extrabold text-xl">G</p>
+        <p className="text-[#F2383A] font-extrabold text-xl">Scores</p>
       </SidebarHeader>
+
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Menu</SidebarGroupLabel>
+          <SidebarGroupLabel className="text-gray-400 px-5">Menu</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => {
-                let isActive = false
-                if (item.url == location.pathname) {
-                  isActive = true
-                }
+                const isActive = item.url === location.pathname
+                const Icon = item.icon
                 return (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton
                       asChild
-                      className={cn(isActive && 'bg-[#BF9BDE] text-black font-semibold px-5 py-6 ', 'px-5 py-6')}
+                      className={cn(
+                        'px-5 py-4 flex gap-3 items-center rounded-lg transition-colors duration-200',
+                        isActive
+                          ? 'bg-[#F99C30] text-white font-bold'
+                          : 'hover:bg-[#5A6ACF]/20 text-gray-300'
+                      )}
                     >
                       <a href={item.url}>
-                        {/* <item.icon color={cn(isActive ? 'black' : '#737373')} /> */}
-                        <span className={cn(isActive ? 'text-black' : 'text-muted-foreground')}> {item.title}</span>
+                        <Icon size={20} className={cn(isActive ? 'text-white' : 'text-gray-400')} />
+                        <span>{item.title}</span>
                       </a>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
@@ -82,5 +85,6 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
     </Sidebar>
+
   )
 }

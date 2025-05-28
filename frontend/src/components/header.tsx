@@ -8,15 +8,15 @@ const Header = () => {
 
       <div className='flex flex-row gap-2 items-center ml-auto'>
         <div className='flex flex-row items-center justify-center gap-2 cursor-pointer'>
-          <Avatar>
+          {/* <Avatar>
             <AvatarImage src='' />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
           <p className='text-black font-light text-sm'>User name</p>
-          <ChevronDown size={18} className='text-muted-foreground' />
+          <ChevronDown size={18} className='text-muted-foreground' /> */}
         </div>
 
-        <BellDot size={18} className='text-muted-foreground cursor-pointer ml-5' />
+        {/* <BellDot size={18} className='text-muted-foreground cursor-pointer ml-5' /> */}
       </div>
     </div>
   )
