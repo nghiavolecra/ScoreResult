@@ -41,10 +41,12 @@ class StudentController extends Controller
     public function topgroupA()
     {
         $students = Student::select('*')
-            ->selectRaw('(toan + vat_li + hoa_hoc) as total_group_a')
+            ->selectRaw('(toan + vat_li + hoa_hoc) as total_group_a, 
+                 ROUND((toan + vat_li + hoa_hoc)/3, 2) as average')
             ->orderByDesc('total_group_a')
             ->limit(10)
             ->get();
+
 
         return response()->json($students);
     }

@@ -8,7 +8,9 @@ import { getBestStudentsGroupA, getOverall } from '@/services'
 
 const DashboardPage = () => {
   const [overallData, setOverallData] = useState<{ [key: string]: string }>({})
-  const [bestStudentGroupA, setBestStudentGroupA] = useState<{ [key: string]: string }[]>([])
+  const [bestStudentGroupA, setBestStudentGroupA] = useState<
+    { sbd: string; toan: string; vat_li: string; hoa_hoc: string; average: number }[]
+  >([])
   const [loading, setLoading] = useState(false)
   useEffect(() => {
     const fetchData = async () => {
@@ -39,7 +41,7 @@ const DashboardPage = () => {
             <CardDescription>🚀 Tổng học sinh</CardDescription>
             <CardTitle className='text-4xl'>
               {' '}
-              <CountUp preserveValue redraw={false} end={parseInt(overallData.hocsinh)} decimal='2' />
+              <CountUp preserveValue redraw={false} end={parseInt(overallData.total_students)} decimal='2' />
             </CardTitle>
           </CardHeader>
         </Card>
@@ -47,7 +49,12 @@ const DashboardPage = () => {
           <CardHeader className='pb-2'>
             <CardDescription>🎯 Số môn học</CardDescription>
             <CardTitle className='text-4xl'>
-              <CountUp preserveValue redraw={false} end={parseInt(overallData.soMon)} decimal='2' />
+              <CountUp
+                preserveValue
+                redraw={false}
+                end={overallData.average_scores ? Object.keys(overallData.average_scores).length : 0}
+                decimal='2'
+              />
             </CardTitle>
           </CardHeader>
         </Card>
@@ -79,6 +86,7 @@ const DashboardPage = () => {
                       ly={item.vat_li}
                       hoa={item.hoa_hoc}
                       dtb={item.average}
+
                     />
                   )
                 })}
@@ -104,7 +112,7 @@ export const StudentTableRow = ({
   toan: string
   ly: string
   hoa: string
-  dtb: string
+  dtb: number
 }) => {
   return (
     <TableRow>
@@ -112,7 +120,7 @@ export const StudentTableRow = ({
       <TableCell className='hidden sm:table-cell'>{toan} </TableCell>
       <TableCell className='hidden sm:table-cell'>{ly} </TableCell>
       <TableCell className='hidden md:table-cell'>{hoa} </TableCell>
-      <TableCell>{String(dtb).slice(0, 4)} </TableCell>
+      <TableCell>{dtb.toFixed(2)}</TableCell>
     </TableRow>
   )
 }
